@@ -1,0 +1,8 @@
+<div class="center">
+    <div *ngIf="typed == false">
+        <label>Input your name </label>
+        <input type="text" name="" id="" (keyup)="updateName($event)" />
+        <button class="btn btn-primary" (click)="updateDisplay()">Enter</button>
+    </div>
+    <h1 *ngIf="typed">Hey! {{ name }}</h1>
+</div>
