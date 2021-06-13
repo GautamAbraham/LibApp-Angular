@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { AuthorService } from '../author.service'
 
 @Component({
   selector: 'app-addauthor',
@@ -7,9 +9,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AddauthorComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router: Router, private authorService: AuthorService) { }
 
   ngOnInit(): void {
   }
 
+  bruh={
+    author: '',
+    famous_work: '',
+    desc: '',
+    img: '',
+  }
+  addAuthor(){
+    this.authorService.addAuthor(this.bruh)
+    this.router.navigate(['authors']);
+  }
 }

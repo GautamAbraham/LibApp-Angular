@@ -11,6 +11,7 @@ app.use(express.json());
 const port = process.env.PORT || 3000;
 
 const bookData = require("./src/model/bookData");
+const authorData = require("./src/model/authorData");
 const userData = require("./src/model/userData");
 
 // const booksRouter = require("./src/routes/bookRoutes");
@@ -48,17 +49,40 @@ app.get("/books", function (req, res) {
     });
 });
 app.post("/addbook", function (req, res) {
+    let temp = req.body.book;
     let item = {
-        title: req.body.book.title,
-        author: req.body.book.author,
-        genre: req.body.book.genre,
-        desc: req.body.book.desc,
-        img: req.body.book.img,
+        title: temp.title,
+        author: temp.author,
+        genre: temp.genre,
+        desc: temp.desc,
+        img: temp.img,
     };
     console.log("adding book");
     let book = bookData(item);
     book.save().then((book) => {
         console.log(book);
+    });
+});
+
+//authorRoutes
+
+app.get("/authors", function (req, res) {
+    authorData.find().then(function (authors) {
+        res.send(authors);
+    });
+});
+app.post("/addauthor", function (req, res) {
+    let temp = req.body.author;
+    let item = {
+        author: temp.author,
+        famous_work: temp.famous_work,
+        desc: temp.desc,
+        img: temp.img,
+    };
+    console.log("adding author");
+    let author = authorData(item);
+    author.save().then((author) => {
+        console.log(author);
     });
 });
 

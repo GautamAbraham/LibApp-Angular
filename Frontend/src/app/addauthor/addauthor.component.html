@@ -1,1 +1,67 @@
-<p>addauthor works!</p>
+<div class="card-header text-center">
+    <h1>Add Author</h1>
+</div>
+
+<div class="card-body">
+    <form
+        class="form col-md-2 center"
+        #addAuthorForm="ngForm"
+        (ngSubmit)="addAuthor()"
+    >
+        <div class="form-group py-3">
+            <label for="author">Author</label>
+            <input
+                type="text"
+                name="author"
+                class="form-control"
+                [(ngModel)]="bruh.author"
+                required
+                #author="ngModel"
+                [class.is-invalid]="author.invalid && author.touched"
+                [class.is-valid]="author.valid"
+            />
+        </div>
+        <div class="form-group pb-3">
+            <label for="famous_work">Famous work</label>
+            <input
+                type="text"
+                name="famous_work"
+                class="form-control"
+                [(ngModel)]="bruh.famous_work"
+                required
+                #famous_work="ngModel"
+                [class.is-invalid]="famous_work.invalid && famous_work.touched"
+                [class.is-valid]="famous_work.valid"
+            />
+        </div>
+        <div class="form-group pb-3">
+            <label for="desc">Author Description</label>
+            <textarea
+                name="desc"
+                [(ngModel)]="bruh.desc"
+                palceholder="Brief Description of Author"
+                style="margin-top: 15px; width: 100%; height: 100px"
+            ></textarea>
+        </div>
+        <div class="form-group pb-3">
+            <label for="img">Image URL</label>
+            <input
+                type="text"
+                name="img"
+                class="form-control"
+                [(ngModel)]="bruh.img"
+                required
+                #img="ngModel"
+                [class.is-invalid]="img.invalid && img.touched"
+                [class.is-valid]="img.valid"
+            />
+        </div>
+        <button
+            type="submit"
+            class="btn btn-primary"
+            [disabled]="addAuthorForm.form.invalid"
+        >
+            Add Author
+        </button>
+    </form>
+</div>

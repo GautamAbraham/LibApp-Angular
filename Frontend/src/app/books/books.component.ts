@@ -9,14 +9,6 @@ import { BookService } from "../books.service";
   styleUrls: ['./books.component.css']
 })
 export class BooksComponent {
-
-  booksData=[{
-    _id :'',
-    title:'',
-    author:'',
-    genre:'',
-    img:''
-  }]
   
   constructor(private router: Router, private bookService: BookService, public _auth: AuthService) { }
 
@@ -25,6 +17,14 @@ export class BooksComponent {
         this.booksData=JSON.parse(JSON.stringify(data));
     })
   }
+
+  booksData=[{
+    _id :'',
+    title:'',
+    author:'',
+    genre:'',
+    img:''
+  }]
     // editBook(book:any){
     //   localStorage.setItem("editBookId", book._id.toString());
     //   this.router.navigate(['update']);
