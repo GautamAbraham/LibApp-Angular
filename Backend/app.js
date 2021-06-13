@@ -39,9 +39,26 @@ function verifyToken(req, res, next) {
     req.userId = payload.subject;
     next();
 }
+
+//bookRoutes
+
 app.get("/books", function (req, res) {
     bookData.find().then(function (books) {
         res.send(books);
+    });
+});
+app.post("/addbook", function (req, res) {
+    let item = {
+        title: req.body.book.title,
+        author: req.body.book.author,
+        genre: req.body.book.genre,
+        desc: req.body.book.desc,
+        img: req.body.book.img,
+    };
+    console.log("adding book");
+    let book = bookData(item);
+    book.save().then((book) => {
+        console.log(book);
     });
 });
 

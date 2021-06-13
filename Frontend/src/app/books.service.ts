@@ -20,6 +20,9 @@ export class BookService {
   getBooks(){
     return this.http.get("http://localhost:3000/books");
   }
+  addBook(book){
+    return this.http.post("http://localhost:3000/addbook",{"book":book}).subscribe(data =>{console.log(data)})
+  }
 
   // newProduct(item:any)
   // {   
