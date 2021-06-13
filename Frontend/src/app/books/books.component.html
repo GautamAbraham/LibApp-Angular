@@ -1,0 +1,50 @@
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel">
+                <div class="panel-body">
+                    <!--/stories-->
+                    <div class="row" *ngFor="let books of booksData">
+                        <br />
+                        <div class="col-md-2 col-sm-3 text-center">
+                            <a
+                                class="story-title"
+                                routerLink="/books/{{ books._id }}"
+                                ><img
+                                    [src]="books.img"
+                                    [alt]="books.title"
+                                    style="width: 100px; height: 100px"
+                            /></a>
+                        </div>
+                        <div class="col-md-10 col-sm-9">
+                            <a routerLink="/books/{{ books._id }}">
+                                <h3>{{ books.title }}</h3>
+                                <div class="row">
+                                    <div class="col-xs-9">
+                                        <h4>
+                                            <span class="label label-default">{{
+                                                books.author
+                                            }}</span>
+                                        </h4>
+                                        <h4>
+                                            <small
+                                                style="
+                                                    font-family: courier,
+                                                        'new courier';
+                                                "
+                                                class="text-muted"
+                                                >{{ books.genre }}</small
+                                            >
+                                        </h4>
+                                    </div>
+                                </div>
+                            </a>
+                            <br /><br />
+                        </div>
+                    </div>
+                    <hr />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

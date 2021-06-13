@@ -1,0 +1,50 @@
+<div class="card-header text-center">
+    <h1>Login</h1>
+</div>
+
+<div class="card-body">
+    <form
+        class="form col-md-2 center"
+        #loginForm="ngForm"
+        (ngSubmit)="userLogin()"
+    >
+        <div class="form-group py-3">
+            <label for="email">Email</label>
+            <input
+                type="email"
+                name="email"
+                id="email"
+                class="form-control"
+                [(ngModel)]="user.email"
+                required
+                #email="ngModel"
+                [class.is-invalid]="email.invalid && email.touched"
+                [class.is-valid]="email.valid"
+                pattern='^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$'
+            />
+            <small
+                class="text-danger"
+                [class.d-none]="email.valid || email.untouched"
+                >Enter Valid Email Settayi</small
+            >
+        </div>
+        <div class="form-group pb-3">
+            <label for="password">Password</label>
+            <input
+                type="password"
+                name="password"
+                id="password"
+                class="form-control"
+                [(ngModel)]="user.password"
+                required
+            />
+        </div>
+        <button
+            type="submit"
+            class="btn btn-primary"
+            [disabled]="loginForm.form.invalid"
+        >
+            Login
+        </button>
+    </form>
+</div>
