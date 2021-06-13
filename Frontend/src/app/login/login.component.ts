@@ -9,20 +9,26 @@ import { AuthService } from "../auth.service";
 })
 export class LoginComponent implements OnInit {
 
+  constructor(private _auth: AuthService, private _router: Router) { }
+
+  ngOnInit(): void {
+  }
+
   user={
     email:'',
     password:''
   }
   userLogin(){
-    console.log(this.user.email, this.user.password)
-    this.authService.loginRequest(this.user).subscribe((res)=>{
-      localStorage.setItem('token', res.token)
-      this.router.navigate([''])
-    })
-    alert("sexess")
-  }
-  constructor(private authService: AuthService, private router: Router) { }
-
-  ngOnInit(): void {
+    // console.log(this.user.email, this.user.password)
+    this._auth.loginRequest(this.user).subscribe(
+      res => {
+        localStorage.setItem('token', res.token)
+        this._router.navigate([''])
+      },
+      err => {
+        console.log(err);
+        this._router.navigate([''])
+      }
+    ) 
   }
 }

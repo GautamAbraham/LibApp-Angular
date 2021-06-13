@@ -44,6 +44,29 @@ app.get("/books", function (req, res) {
         res.send(books);
     });
 });
+
+//loginRoutes
+
+app.post("/login", (req, res) => {
+    let user = req.body;
+    userData.findOne(
+        { email: user.email, password: user.password },
+        function (err, user) {
+            if (err || !user) {
+                // "if error or no user"
+                console.log("invalid Login cred");
+                res.status(401).send("Invalid login credentials");
+            } else {
+                console.log("purrfect");
+                let payload = { subject: user.email + user.password };
+                let token = jwt.sign(payload, "secretKey");
+                res.status(200).send({ token });
+                // res.redirect("/");
+                // res.send("logged in!");
+            }
+        }
+    );
+});
 app.post("/signup", function (req, res) {
     console.log(req.body);
     var item = {
@@ -87,20 +110,6 @@ app.post("/signup", function (req, res) {
 //     ProductData.findOne({ _id: id }).then((product) => {
 //         res.send(product);
 //     });
-// });
-
-// app.post("/login", (req, res) => {
-//     let userData = req.body;
-
-//     if (!email) {
-//         res.status(401).send("Invalid email");
-//     } else if (password !== userData.password) {
-//         res.status(401).send("Invalid Password");
-//     } else {
-//         let payload = { subject: email + password };
-//         let token = jwt.sign(payload, "secretKey");
-//         res.status(200).send({ token });
-//     }
 // });
 
 // app.put("/update", (req, res) => {
