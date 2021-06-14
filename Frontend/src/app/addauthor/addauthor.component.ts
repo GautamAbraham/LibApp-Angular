@@ -14,14 +14,14 @@ export class AddauthorComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  bruh={
+  authorData={
     author: '',
     famous_work: '',
     desc: '',
     img: '',
   }
   addAuthor(){
-    this.authorService.addAuthor(this.bruh)
+    this.authorService.addAuthor(this.authorData)
     this.router.navigate(['authors']);
   }
 }
