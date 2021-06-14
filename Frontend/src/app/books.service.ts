@@ -25,7 +25,7 @@ export class BookService {
     
   }
   addBook(book){
-    return this.http.post("http://localhost:3000/addbook",{"book":book}).subscribe(data =>{console.log(data)})
+    return this.http.post("http://localhost:3000/books/addbook",{"book":book}).subscribe(data =>{console.log(data)})
   }
   editBook(book:any){
     console.log("updating book")

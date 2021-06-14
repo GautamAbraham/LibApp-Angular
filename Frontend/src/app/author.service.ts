@@ -21,7 +21,7 @@ export class AuthorService {
     return this.http.get("http://localhost:3000/authors/"+id);    
   }
   addAuthor(author){
-    return this.http.post("http://localhost:3000/addauthor",{"author":author}).subscribe(data =>{console.log(data)})
+    return this.http.post("http://localhost:3000/authors/addauthor",{"author":author}).subscribe(data =>{console.log(data)})
   }
   editAuthor(author:any){
     console.log("updating author")

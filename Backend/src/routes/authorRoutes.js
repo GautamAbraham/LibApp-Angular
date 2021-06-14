@@ -1,78 +1,63 @@
 const express = require("express");
 const authorData = require("../model/authorData");
 const authorsRouter = express.Router();
-const path = require("path");
-// upload path for authorimages
-const uploadPathtwo = path.join("public", authorData.authorimagepath);
+const cors = require("cors");
+authorsRouter.use(
+    cors({
+        origin: "*",
+    })
+);
+authorsRouter.use(express.json());
 
-//multer- these are necessary for multer
-const multer = require("multer");
-const uploadtwo = multer({
-	dest: uploadPathtwo,
-	fileFilter: (req, file, callback) => {
-		callback(null, true);
-	},
+authorsRouter.get("/", function (req, res) {
+    authorData.find().then(function (authors) {
+        res.send(authors);
+    });
+});
+authorsRouter.get("/:id", function (req, res) {
+    const id = req.params.id;
+    authorData.findOne({ _id: id }).then(function (author) {
+        res.send(author);
+    });
+});
+authorsRouter.post("/addauthor", function (req, res) {
+    let temp = req.body.author;
+    let item = {
+        author: temp.author,
+        famous_work: temp.famous_work,
+        desc: temp.desc,
+        img: temp.img,
+    };
+    console.log("adding author");
+    let author = authorData(item);
+    author.save().then((author) => {
+        console.log(author);
+    });
+});
+authorsRouter.post("/update", function (req, res) {
+    let temp = req.body.author;
+    const id = temp._id;
+    var myquery = { _id: id };
+    var newvalues = {
+        $set: {
+            author: temp.author,
+            famous_work: temp.famous_work,
+            desc: temp.desc,
+            img: temp.img,
+        },
+    };
+    console.log(temp);
+    authorData.updateOne(myquery, newvalues, function (err, res) {
+        if (err) throw err;
+        console.log("1 author updated");
+    });
+});
+authorsRouter.post("/delete", function (req, res) {
+    let temp = req.body.author;
+    const id = temp._id;
+    authorData.deleteOne({ _id: id }).then(() => {
+        console.log("deleted the author");
+    });
 });
 
-function router(nav) {
-	authorsRouter.get("/", function (req, res) {
-		authorData.find().then(function (authors) {
-			res.render("authors", {
-				nav,
-				title: "Authors",
-				authors,
-			});
-		});
-	});
-
-	authorsRouter.get("/:id", function (req, res) {
-		const id = req.params.id;
-		authorData.findOne({ _id: id }).then(function (author) {
-			res.render("author", {
-				nav,
-				author,
-			});
-		});
-	});
-
-	authorsRouter.get("/delete/:id", function (req, res) {
-		const id = req.params.id;
-		authorData.deleteOne({ _id: id }).then(() => {
-			res.redirect("/authors");
-		});
-	});
-	// route to go to edit book page
-	authorsRouter.get("/edit/:id", (req, res) => {
-		const id = req.params.id;
-		authorData.findById(id).then((data) => {
-			res.render("addAuthor", {
-				nav,
-				title: "Edit Book Details",
-				author: data,
-			});
-		});
-	});
-	// route with update fn
-	authorsRouter.post("/update", uploadtwo.single("imge"), function (req, res) {
-		const fileNametwo = req.file != null ? req.file.filename : null;
-		const id = req.body.id;
-		var myquery = { _id: id };
-		var newvalues = {
-			$set: {
-				author: req.body.author,
-				famous_work: req.body.famous_work,
-				desc: req.body.desc,
-				img: fileNametwo,
-			},
-		};
-		authorData.updateOne(myquery, newvalues, function (err, res) {
-			if (err) throw err;
-			console.log("1 document updated");
-		});
-		res.redirect("/authors/" + id);
-	});
-
-	return authorsRouter;
-}
-
-module.exports = router;
+module.exports = authorsRouter;
