@@ -22,24 +22,6 @@ const userData = require("./src/model/userData");
 // app.use("/books", booksRouter);
 // app.use("/authors", authorsRouter);
 // app.use("/login", loginRouter);
-// email = "admin@admin.com";
-// password = "1234";
-
-function verifyToken(req, res, next) {
-    if (!req.headers.authorization) {
-        return res.status(401).send("Unauthorized request");
-    }
-    let token = req.headers.authorization.split(" ")[1];
-    if (token === "null") {
-        return res.status(401).send("Unauthorized request");
-    }
-    let payload = jwt.verify(token, "secretKey");
-    if (!payload) {
-        return res.status(401).send("Unauthorized request");
-    }
-    req.userId = payload.subject;
-    next();
-}
 
 //bookRoutes
 
@@ -85,7 +67,7 @@ app.post("/books/update", function (req, res) {
     console.log(temp);
     bookData.updateOne(myquery, newvalues, function (err, res) {
         if (err) throw err;
-        console.log("1 document updated");
+        console.log("1 book updated");
     });
 });
 app.post("/books/delete", function (req, res) {
@@ -103,6 +85,12 @@ app.get("/authors", function (req, res) {
         res.send(authors);
     });
 });
+app.get("/authors/:id", function (req, res) {
+    const id = req.params.id;
+    authorData.findOne({ _id: id }).then(function (author) {
+        res.send(author);
+    });
+});
 app.post("/addauthor", function (req, res) {
     let temp = req.body.author;
     let item = {
@@ -115,6 +103,31 @@ app.post("/addauthor", function (req, res) {
     let author = authorData(item);
     author.save().then((author) => {
         console.log(author);
+    });
+});
+app.post("/authors/update", function (req, res) {
+    let temp = req.body.author;
+    const id = temp._id;
+    var myquery = { _id: id };
+    var newvalues = {
+        $set: {
+            author: temp.author,
+            famous_work: temp.famous_work,
+            desc: temp.desc,
+            img: temp.img,
+        },
+    };
+    console.log(temp);
+    authorData.updateOne(myquery, newvalues, function (err, res) {
+        if (err) throw err;
+        console.log("1 author updated");
+    });
+});
+app.post("/authors/delete", function (req, res) {
+    let temp = req.body.author;
+    const id = temp._id;
+    authorData.deleteOne({ _id: id }).then(() => {
+        console.log("deleted the author");
     });
 });
 

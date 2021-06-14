@@ -25,4 +25,8 @@ export class AuthorsComponent implements OnInit {
     desc:'',
     img:''
   }];
+  readMore(author){
+    localStorage.setItem("readMoreAuthorId", author._id.toString());
+    this.router.navigate(['/authors/readmore']);
+  }
 }

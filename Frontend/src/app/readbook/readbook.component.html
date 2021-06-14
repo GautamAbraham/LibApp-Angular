@@ -25,23 +25,20 @@
                 </div>
                 <div class="col-md-10">
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-7">
                             <h4>
                                 <span class="label label-default">
                                     {{ bookData.author }}
                                 </span>
                             </h4>
                             <h4>
-                                <small
-                                    style="font-family: courier, 'new courier'"
-                                    class="text-muted"
-                                >
+                                <small>
                                     {{ bookData.genre }}
                                 </small>
                             </h4>
                             <p>{{ bookData.desc }}</p>
                         </div>
-                        <div class="col-md-3">
+                        <div class="col-md-3" *ngIf="_auth.loggedIn()">
                             <button
                                 class="btn btn-success btn-lg"
                                 id="update"

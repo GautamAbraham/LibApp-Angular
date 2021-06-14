@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService } from '../auth.service';
 import { BookService } from '../books.service';
 
 @Component({
@@ -9,7 +10,7 @@ import { BookService } from '../books.service';
 })
 export class ReadbookComponent implements OnInit {
 
-  constructor(private router: Router, private bookService: BookService) { }
+  constructor(private router: Router, private bookService: BookService, public _auth: AuthService) { }
 
   ngOnInit(): void {
     let bookId = localStorage.getItem("readMoreBookId");

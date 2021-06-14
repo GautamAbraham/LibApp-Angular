@@ -1,1 +1,58 @@
-<p>readauthor works!</p>
+<div class="container">
+    <div class="row">
+        <div class="col-md-7">
+            <h1>
+                {{ authorData.author }}
+            </h1>
+        </div>
+    </div>
+</div>
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="row">
+                <br />
+                <div class="col-md-2 col-sm-3 text-center">
+                    <img
+                        alt="{{ authorData.author }}"
+                        [src]="authorData.img"
+                        style="width: 100px; height: 100px"
+                        class="img-circle"
+                    />
+                </div>
+                <div class="col-md-10">
+                    <div class="row">
+                        <div class="col-md-7">
+                            <h4>
+                                <small>
+                                    {{ authorData.famous_work }}
+                                </small>
+                            </h4>
+                            <p>{{ authorData.desc }}</p>
+                        </div>
+                        <div class="col-md-3" *ngIf="_auth.loggedIn()">
+                            <button
+                                class="btn btn-success btn-lg"
+                                id="update"
+                                style="margin-left: 10%"
+                                (click)="updateAuthor()"
+                            >
+                                Update
+                            </button>
+                            <br />
+                            <button
+                                id="delete"
+                                class="btn btn-danger btn-lg"
+                                id="delete"
+                                style="margin-left: 10%"
+                                (click)="deleteAuthor()"
+                            >
+                                Delete
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
