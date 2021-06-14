@@ -17,7 +17,6 @@ ngOnInit() {
   this.router.events.pipe(filter(event => event instanceof NavigationEnd),).subscribe(() => {
     const rt = this.getChild(this.activatedRoute);  
     rt.data.subscribe(data => {  
-    console.log(data);  
     this.titleService.setTitle(data.title)});  
 });  
 }  

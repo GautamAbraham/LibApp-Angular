@@ -1,0 +1,70 @@
+<div id="masthead">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-7">
+                <h1>
+                    {{ bookData.title }}
+                </h1>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-12">
+            <!--/stories-->
+            <div class="row">
+                <br />
+                <div class="col-md-2 col-sm-3 text-center">
+                    <img
+                        alt=" {{ bookData.title }} "
+                        [src]="bookData.img"
+                        style="width: 100px; height: 100px"
+                        class="img-circle"
+                    />
+                </div>
+                <div class="col-md-10">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h4>
+                                <span class="label label-default">
+                                    {{ bookData.author }}
+                                </span>
+                            </h4>
+                            <h4>
+                                <small
+                                    style="font-family: courier, 'new courier'"
+                                    class="text-muted"
+                                >
+                                    {{ bookData.genre }}
+                                </small>
+                            </h4>
+                            <p>{{ bookData.desc }}</p>
+                        </div>
+                        <div class="col-md-3">
+                            <button
+                                class="btn btn-success btn-lg"
+                                id="update"
+                                style="margin-left: 10%"
+                                (click)="updateBook()"
+                            >
+                                Update
+                            </button>
+                            <br />
+                            <button
+                                id="delete"
+                                class="btn btn-danger btn-lg"
+                                id="delete"
+                                style="margin-left: 10%"
+                                (click)="deleteBook()"
+                            >
+                                Delete
+                            </button>
+                        </div>
+                    </div>
+                    <hr />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

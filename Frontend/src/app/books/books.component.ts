@@ -23,17 +23,11 @@ export class BooksComponent {
     title:'',
     author:'',
     genre:'',
+    desc: '',
     img:''
   }]
-    // editBook(book:any){
-    //   localStorage.setItem("editBookId", book._id.toString());
-    //   this.router.navigate(['update']);
-  
-    // }
-    // deleteBook(book:any){
-    //   this.bookService.deleteProduct(book._id)
-    //     .subscribe((data) => {
-    //       this.booksData = this.booksData.filter(p => p !== book);
-    //     })
-    // }
+  readMore(book){
+    localStorage.setItem("readMoreBookId", book._id.toString());
+    this.router.navigate(['/books/readmore']);
+  }
 }

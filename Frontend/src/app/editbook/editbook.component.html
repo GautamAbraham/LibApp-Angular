@@ -1,0 +1,80 @@
+<div class="card-header text-center">
+    <h1>Edit Book</h1>
+</div>
+
+<div class="card-body">
+    <form
+        class="form col-md-2 center"
+        #editBookForm="ngForm"
+        (ngSubmit)="editBook()"
+    >
+        <div class="form-group py-3">
+            <label for="title">Title</label>
+            <input
+                type="text"
+                name="title"
+                class="form-control"
+                [(ngModel)]="book.title"
+                required
+                #title="ngModel"
+                [class.is-invalid]="title.invalid && title.touched"
+                [class.is-valid]="title.valid"
+            />
+        </div>
+        <div class="form-group pb-3">
+            <label for="author">Author</label>
+            <input
+                type="text"
+                name="author"
+                class="form-control"
+                [(ngModel)]="book.author"
+                required
+                #author="ngModel"
+                [class.is-invalid]="author.invalid && author.touched"
+                [class.is-valid]="author.valid"
+            />
+        </div>
+        <div class="form-group pb-3">
+            <label for="genre">Genre</label>
+            <input
+                type="text"
+                name="genre"
+                class="form-control"
+                [(ngModel)]="book.genre"
+                required
+                #genre="ngModel"
+                [class.is-invalid]="genre.invalid && genre.touched"
+                [class.is-valid]="genre.valid"
+            />
+        </div>
+        <div class="form-group pb-3">
+            <label for="desc">Book Description</label>
+            <textarea
+                name="desc"
+                [(ngModel)]="book.desc"
+                palceholder="Brief Description of Book"
+                style="margin-top: 15px; width: 100%; height: 100px"
+            ></textarea>
+        </div>
+        <div class="form-group pb-3">
+            <label for="img">Image URL</label>
+            <input
+                type="text"
+                name="img"
+                class="form-control"
+                [(ngModel)]="book.img"
+                required
+                #img="ngModel"
+                [class.is-invalid]="img.invalid && img.touched"
+                [class.is-valid]="img.valid"
+            />
+        </div>
+        <button
+            type="submit"
+            class="btn btn-primary"
+            [disabled]="editBookForm.form.invalid"
+        >
+            Edit Book
+        </button>
+    </form>
+</div>

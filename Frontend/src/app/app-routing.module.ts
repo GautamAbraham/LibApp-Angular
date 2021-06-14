@@ -12,18 +12,22 @@ import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
 import { BookComponent } from './book/book.component';
 import { AuthorComponent } from './author/author.component';
+import { ReadbookComponent } from './readbook/readbook.component';
+import { ReadauthorComponent } from './readauthor/readauthor.component';
+import { EditbookComponent } from './editbook/editbook.component';
+import { EditauthorComponent } from './editauthor/editauthor.component';
 
 const routes: Routes =  [
                           {path: "", component: IndexComponent, data : {title: 'LibApp'}},
-                          {path:'book',component:BookComponent,
+                          {path:'books',component:BookComponent,
                                 children:[{path:'',component:BooksComponent, data : {title: 'LibApp - Books'}},
-                                          // {path:'readmore', component:ReadbookComponent},
-                                          // {path:'update',canActivate:[AuthGuard] ,component:UpdatebookComponent}
+                                          {path:'readmore', component:ReadbookComponent, data : {title: 'LibApp - Read More'}},
+                                          {path:'update',canActivate:[AuthGuard] ,component: EditbookComponent, data : {title: 'LibApp - Edit Book'}}
                                         ]},
-                          {path:'author',component:AuthorComponent,
+                          {path:'authors',component:AuthorComponent,
                                 children:[{path:'',component:AuthorsComponent, data : {title: 'LibApp - Authors'}},
-                                          // {path:'readmore', component:ReadauthComponent},
-                                          // {path:'update',canActivate:[AuthGuard] ,component:UpdateauthComponent}
+                                          {path:'readmore', component: ReadauthorComponent, data : {title: 'LibApp - Read More'}},
+                                          {path:'update',canActivate:[AuthGuard] ,component: EditauthorComponent, data : {title: 'LibApp - Edit Author'}}
                                         ]},
                           {path: "addbook", component: AddbookComponent, canActivate:[AuthGuard], data : {title: 'LibApp - Add Book'}},
                           {path: "addauthor", component: AddauthorComponent, canActivate:[AuthGuard], data : {title: 'LibApp - Add Author'}},

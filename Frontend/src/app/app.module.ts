@@ -16,6 +16,10 @@ import { AuthorComponent } from './author/author.component';
 import { AuthorsComponent } from './authors/authors.component';
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
+import { ReadbookComponent } from './readbook/readbook.component';
+import { ReadauthorComponent } from './readauthor/readauthor.component';
+import { EditbookComponent } from './editbook/editbook.component';
+import { EditauthorComponent } from './editauthor/editauthor.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +34,11 @@ import { SignupComponent } from './signup/signup.component';
     AuthorComponent,
     AuthorsComponent,
     LoginComponent,
-    SignupComponent
+    SignupComponent,
+    ReadbookComponent,
+    ReadauthorComponent,
+    EditbookComponent,
+    EditauthorComponent
   ],
   imports: [
     BrowserModule,

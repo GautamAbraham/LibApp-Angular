@@ -20,10 +20,21 @@ export class BookService {
   getBooks(){
     return this.http.get("http://localhost:3000/books");
   }
+  getBook(id){
+    return this.http.get("http://localhost:3000/books/"+id);
+    
+  }
   addBook(book){
     return this.http.post("http://localhost:3000/addbook",{"book":book}).subscribe(data =>{console.log(data)})
   }
-
+  editBook(book:any){
+    console.log("updating book")
+    return this.http.post("http://localhost:3000/books/update",{"book":book}).subscribe(data =>{console.log(data)})
+  }
+  deleteBook(book:any){
+    console.log("deleting book")
+    return this.http.post("http://localhost:3000/books/delete",{"book":book}).subscribe(data =>{console.log(data)})
+  }
   // newProduct(item:any)
   // {   
   //   return this.http.post("http://localhost:3000/insert",{"product":item})

@@ -48,6 +48,12 @@ app.get("/books", function (req, res) {
         res.send(books);
     });
 });
+app.get("/books/:id", function (req, res) {
+    const id = req.params.id;
+    bookData.findOne({ _id: id }).then(function (book) {
+        res.send(book);
+    });
+});
 app.post("/addbook", function (req, res) {
     let temp = req.body.book;
     let item = {
@@ -61,6 +67,32 @@ app.post("/addbook", function (req, res) {
     let book = bookData(item);
     book.save().then((book) => {
         console.log(book);
+    });
+});
+app.post("/books/update", function (req, res) {
+    let temp = req.body.book;
+    const id = temp._id;
+    var myquery = { _id: id };
+    var newvalues = {
+        $set: {
+            title: temp.title,
+            author: temp.author,
+            genre: temp.genre,
+            desc: temp.desc,
+            img: temp.img,
+        },
+    };
+    console.log(temp);
+    bookData.updateOne(myquery, newvalues, function (err, res) {
+        if (err) throw err;
+        console.log("1 document updated");
+    });
+});
+app.post("/books/delete", function (req, res) {
+    let temp = req.body.book;
+    const id = temp._id;
+    bookData.deleteOne({ _id: id }).then(() => {
+        console.log("deleted the book");
     });
 });
 
